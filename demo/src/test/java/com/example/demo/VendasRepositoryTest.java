@@ -23,10 +23,9 @@ public class VendasRepositoryTest {
 
     @Test
     public void verificaSalvaVenda(){
-        int i = 1;
-        Long l = Long.valueOf(i);
+ 
         LocalDate date = LocalDate.now();
-        Vendas venda = Vendas.builder().numeroVenda(l).data_venda(date).build();
+        Vendas venda = Vendas.builder().data_venda(date).build();
 
         //Ação
         Vendas salvo = repository.save(venda);
@@ -38,9 +37,7 @@ public class VendasRepositoryTest {
     }
     @Test
     public void verificaSeSalvaVendaSemData(){
-        int i = 1;
-        Long l = Long.valueOf(i);
-        Vendas venda = Vendas.builder().numeroVenda(l).build();
+        Vendas venda = Vendas.builder().build();
 
         //Ação
         Vendas salvo = repository.save(venda);

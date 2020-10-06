@@ -21,9 +21,7 @@ public class MercadoriasRepositoryTest {
 
     @Test
     public void verificaSalvaMercadoria(){
-        int i = 1;
-        Long l = Long.valueOf(i);
-        Mercadorias mercadoria = Mercadorias.builder().codigo(l).descricao("Produto bom").build();
+        Mercadorias mercadoria = Mercadorias.builder().descricao("Produto bom").build();
 
         Mercadorias salvo = repository.save(mercadoria);
 
@@ -31,5 +29,6 @@ public class MercadoriasRepositoryTest {
         Assertions.assertNotNull(salvo);
         Assertions.assertEquals(mercadoria.getCodigo(), salvo.getCodigo());
         Assertions.assertEquals(mercadoria.getDescricao(), salvo.getDescricao());
+        System.out.println(mercadoria.getDescricao());
     }
 }
