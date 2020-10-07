@@ -1,8 +1,8 @@
 package com.example.demo.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.example.demo.dto.MercadoriasNaVenda;
 import com.example.demo.entidades.Vendas;
 import com.example.demo.repository.VendasRepository;
 import com.example.demo.services.exceptions.RegraNegocioRunTime;
@@ -22,9 +22,13 @@ public class VendasService {
         verificarVenda(venda);
         return repository.save(venda);
     }
-    public List<MercadoriasNaVenda> obterMercadorias(Vendas venda){
-        verificarVenda(venda);
-        return repository.obterMercadorias(venda);
+    public List<Vendas> listarVendas(){
+        var found = repository.findAll();
+
+        var vendalist = new ArrayList<Vendas>();
+        found.forEach(e -> vendalist.add(e));
+        return vendalist;
+
     }
     public void verificarId(Vendas venda){
         if((venda == null) || venda.getNumeroVenda() == null)
