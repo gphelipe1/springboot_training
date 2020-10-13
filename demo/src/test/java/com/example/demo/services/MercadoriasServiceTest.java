@@ -36,7 +36,7 @@ public class MercadoriasServiceTest {
     Venda_mercadoriaService venda_mercService;
 
     @Test
-    public void TestaVenderMercadoria(){
+    public void testaVenderMercadoria(){
 
         LocalDate date = LocalDate.now();
 
