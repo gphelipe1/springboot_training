@@ -27,15 +27,16 @@ public class VendasService {
 
         var vendalist = new ArrayList<Vendas>();
         found.forEach(e -> vendalist.add(e));
+        vendalist.forEach(e->verificarId(e));
         return vendalist;
-
     }
-    public void verificarId(Vendas venda){
+
+    private void verificarId(Vendas venda){
         if((venda == null) || venda.getNumeroVenda() == null)
             throw new RegraNegocioRunTime("Venda inválida");
     }
 
-    public void verificarVenda(Vendas venda){
+    private void verificarVenda(Vendas venda){
         if(venda == null)
             throw new RegraNegocioRunTime("Venda inválida");
         if(venda.getData_venda() == null)

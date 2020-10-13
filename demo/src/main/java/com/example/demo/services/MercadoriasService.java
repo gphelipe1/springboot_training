@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.example.demo.entidades.Mercadorias;
+import com.example.demo.entidades.Venda_mercadoria;
 import com.example.demo.entidades.Vendas;
 import com.example.demo.repository.MercadoriasRepository;
 import com.example.demo.services.exceptions.RegraNegocioRunTime;
@@ -22,6 +23,9 @@ public class MercadoriasService {
     @Autowired
     VendasService venda;
 
+    @Autowired
+    Venda_mercadoriaService venda_mercService;
+
     public Mercadorias salvar(Mercadorias mercadoria){
         verificarMercadoria(mercadoria);
         return repository.save(mercadoria);
@@ -32,19 +36,20 @@ public class MercadoriasService {
         return salvar(mercadoria);
     } 
 
-    public void venderMercadoria(Mercadorias mercadoria, Vendas newVenda){
+    public void venderMercadoria(Mercadorias mercadoria, Vendas newVenda, Venda_mercadoria vendaMerc){
         verificarId(mercadoria);
         verificarMercadoria(mercadoria);
-        repository.delete(mercadoria);
         venda.salvar(newVenda);
+        venda_mercService.salvar(vendaMerc);
+        //repository.delete(mercadoria);
     }
 
-    public void verificarId(Mercadorias mercadoria){
+    private void verificarId(Mercadorias mercadoria){
         if((mercadoria == null) || mercadoria.getCodigo()== null)
             throw new RegraNegocioRunTime("Mercadoria inválida");
     }
 
-    public void verificarMercadoria(Mercadorias mercadoria){
+    private void verificarMercadoria(Mercadorias mercadoria){
         if(mercadoria == null)
             throw new RegraNegocioRunTime("Mercadoria não cadastrada");
         if(mercadoria.getDescricao() == null)
