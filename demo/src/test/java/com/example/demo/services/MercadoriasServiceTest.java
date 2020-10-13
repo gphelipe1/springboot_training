@@ -63,8 +63,11 @@ public class MercadoriasServiceTest {
         Assertions.assertEquals(newVendaMerc.getMercadoria(), vendaMercSalva.getMercadoria());
 
         try {
+           
             service.venderMercadoria(mercadoriaSalva, newVendaSalva, vendaMercSalva);
+        
         } catch (Exception e) {
+        
             System.out.println(e);
         } 
     }
