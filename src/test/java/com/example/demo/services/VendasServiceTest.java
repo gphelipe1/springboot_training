@@ -28,6 +28,7 @@ public class VendasServiceTest {
     
     @Test
     public void testaListarVendas(){
+       
         LocalDate date = LocalDate.now();
 
         Vendas venda1 = Vendas.builder().data_venda(date).build();
