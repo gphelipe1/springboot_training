@@ -8,6 +8,9 @@ import com.example.demo.repository.VendasRepository;
 import com.example.demo.services.exceptions.RegraNegocioRunTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +28,7 @@ public class VendasService {
     public List<Vendas> listarVendas(){
         var found = repository.findAll();
 
-        var vendalist = new ArrayList<Vendas>();
+        List<Vendas> vendalist = new ArrayList<Vendas>();
         found.forEach(e -> vendalist.add(e));
         vendalist.forEach(e->verificarId(e));
         return vendalist;
@@ -41,6 +44,14 @@ public class VendasService {
             throw new RegraNegocioRunTime("Venda inválida");
         if(venda.getData_venda() == null)
             throw new RegraNegocioRunTime("Data da venda deve ser informada");
+    }
+
+    public List<Vendas> buscar(Vendas filtro){
+        Example<Vendas> example = 
+            Example.of(filtro, ExampleMatcher.matching()
+            .withIgnoreCase()
+            .withStringMatcher(StringMatcher.CONTAINING));
+        return repository.findAll(example);
     }
     
 }

@@ -41,7 +41,6 @@ public class MercadoriasService {
         verificarMercadoria(mercadoria);
         venda.salvar(newVenda);
         venda_mercService.salvar(vendaMerc);
-        //repository.delete(mercadoria);
     }
 
     private void verificarId(Mercadorias mercadoria){
