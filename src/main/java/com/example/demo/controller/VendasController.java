@@ -44,13 +44,12 @@ public class VendasController {
     }
 
     @GetMapping("/vendas")
-    public ResponseEntity listarVendas(@RequestParam(required = false) String noneparam) {
+    public ResponseEntity listarVendas() {
         
-        List<Vendas> lista = new ArrayList<Vendas>();
         try {
             
-            lista = service.listarVendas();
-            return ResponseEntity.ok(true);
+            List<Vendas> lista = service.listarVendas();
+            return new ResponseEntity(lista, HttpStatus.OK);
 
         } catch (RegraNegocioRunTime e) {
             return ResponseEntity.badRequest().body(e.getMessage());
